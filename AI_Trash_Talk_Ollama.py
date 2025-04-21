@@ -3,6 +3,7 @@ import pyttsx3
 import subprocess
 import random
 from PIL import Image, ImageTk
+import os
 
 # === Text-to-Speech Setup ===
 engine = pyttsx3.init()
@@ -66,8 +67,12 @@ screen_w = root.winfo_screenwidth()
 screen_h = root.winfo_screenheight()
 root.geometry(f"{screen_w}x{screen_h}")
 
-# === Load Background Image ===
-bg_image = Image.open(r"C:\\Users\\foosbots\\Desktop\\Software Engineering Class\\Screenshot 2025-04-18 160753.png")
+# === Load Background Image (with fallback) ===
+try:
+    bg_image = Image.open(r"C:\\Users\\foosbots\\Desktop\\Software Engineering Class\\Screenshot 2025-04-18 160753.png")
+except FileNotFoundError:
+    bg_image = Image.new("RGB", (screen_w, screen_h), color=(0, 0, 0))  # Black fallback
+
 bg_image = bg_image.resize((screen_w, screen_h))
 bg_photo = ImageTk.PhotoImage(bg_image)
 
