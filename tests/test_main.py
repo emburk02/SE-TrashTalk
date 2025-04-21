@@ -1,23 +1,24 @@
 import unittest
 from unittest.mock import patch
-import builtins
-import random
 import tkinter as tk
 
-# Mock what we need from your main script
-import AI_Trash_Talk_Ollama as main  # Adjust this if your filename is different
+# Make sure the filename of your script is ai_trash_talk.py (no spaces!)
+import AI_Trash_Talk_Ollama as main
 
 class TestTrashTalkApp(unittest.TestCase):
-    def test_fallback_response(self):
-        event = "AI Scores"
-        line = main.get_ollama_response("bad prompt", event)
-        self.assertIn(line, main.fallback_lines[event])
-
     @patch("pyttsx3.init")
     def test_trigger_trash_talk_runs(self, mock_tts):
-        main.output_text = tk.StringVar()
-        main.trigger_trash_talk("Game Over")
-        self.assertTrue(len(main.output_text.get()) > 0)
+        # Simulate the TTS engine so CI doesn't try to speak
+        mock_engine = mock_tts.return_value
+        mock_engine.say.return_value = None
+        mock_engine.runAndWait.return_value = None
 
-if __name__ == '__main__':
+        # Simulate the output string
+        main.output_text = tk.StringVar()
+        main.trigger_trash_talk("AI Scores")
+
+        # Make sure the fallback line or output was set
+        self.assertIn(main.output_text.get(), main.fallback_lines["AI Scores"])
+
+if __name__ == "__main__":
     unittest.main()
