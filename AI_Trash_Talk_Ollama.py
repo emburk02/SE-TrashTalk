@@ -70,13 +70,16 @@ root.geometry(f"{screen_w}x{screen_h}")
 # === Load Background Image (with fallback) ===
 try:
     bg_image = Image.open(r"C:\\Users\\foosbots\\Desktop\\Software Engineering Class\\Screenshot 2025-04-18 160753.png")
+    bg_image = bg_image.resize((screen_w, screen_h))
 except FileNotFoundError:
-    bg_image = Image.new("RGB", (screen_w, screen_h), color=(0, 0, 0))  # Black fallback
+    # Use safe fallback resolution when mocking or testing
+    fallback_w, fallback_h = 1920, 1080
+    bg_image = Image.new("RGB", (fallback_w, fallback_h), color=(0, 0, 0))
 
 bg_image = bg_image.resize((screen_w, screen_h))
 bg_photo = ImageTk.PhotoImage(bg_image)
 
-canvas = tk.Canvas(root, width=screen_w, height=screen_h)
+canvas = tk.Canvas(root, width=bg_image.width, height=bg_image.height)
 canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, image=bg_photo, anchor="nw")
 
