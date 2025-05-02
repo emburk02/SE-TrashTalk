@@ -32,6 +32,8 @@ A desktop application that delivers AI-generated one-liners during a foosball ga
 ---
 
 ## How to Run
+When running the code you will need to copy ollama's saved path and paste it on line 38.
+![image](https://github.com/user-attachments/assets/5909f420-7441-402a-bf0c-797d8721a930)
 
 ### 1. Install Dependencies
 
