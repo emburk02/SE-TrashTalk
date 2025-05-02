@@ -15,9 +15,7 @@ A desktop application that delivers AI-generated one-liners during a foosball ga
 ---
 
 ## GUI Preview
-
-(Optional: insert screenshot here of your GUI running)
-
+![image](https://github.com/user-attachments/assets/07e9680a-4135-4d3b-96be-c2cf82ede9ac)
 ---
 
 ## Event Types
